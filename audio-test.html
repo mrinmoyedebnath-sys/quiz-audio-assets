@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Audio Test</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f0f0f0; }
+        h1 { color: #333; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 8px; font-weight: bold; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        #audio-url { font-size: 0.9em; color: #007bff; word-break: break-all; margin-bottom: 20px; }
+        #audio-element { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Audio Playback Test</h1>
+    
+    <div id="result" class="result error">Testing...</div>
+
+    <p>Loading audio from:</p>
+    <code id="audio-url">https://github.com/mrinmoyedebnath-sys/quiz-audio-assets/blob/fcccc432f4c58919d1095debe1cd703adc137914/_Kbc_Timer_Tik_Tik_Kbc_Clock_Ringtone_(by%20Fringster.com).mp3</code>
+    
+    <audio controls id="audio-element" style="display: none;"></audio>
+
+    <script>
+        // 🚨 REPLACE THIS PLACEHOLDER with your actual URL
+        const AUDIO_FILE_URL = 'PASTE_YOUR_GITHUB_PAGES_AUDIO_URL_HERE';
+        
+        const audioEl = document.getElementById('audio-element');
+        const resultDiv = document.getElementById('result');
+        const urlCode = document.getElementById('audio-url');
+        
+        urlCode.textContent = AUDIO_FILE_URL;
+        audioEl.src = AUDIO_FILE_URL;
+
+        audioEl.onloadeddata = () => {
+            resultDiv.className = 'result success';
+            resultDiv.textContent = 'SUCCESS! The URL is correct. Audio loaded and ready to play.';
+            audioEl.style.display = 'block';
+        };
+
+        audioEl.onerror = (e) => {
+            resultDiv.className = 'result error';
+            resultDiv.textContent = 'ERROR! Could not load the audio from the URL. Check the link and GitHub Pages setup.';
+            console.error("Audio Load Error:", e);
+        };
+        
+        // Try loading immediately
+        audioEl.load();
+    </script>
+</body>
+</html>
